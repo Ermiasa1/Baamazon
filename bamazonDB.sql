@@ -24,3 +24,4 @@ VALUES ("Liquid Soup","Laundry",15.50,124),
     ("Nike basketball shoes","Sport",68.50,36),
     ("Exercise book","Stationery",4.00,215),
     ("Star wars","Entertainment",23.75,38);
+

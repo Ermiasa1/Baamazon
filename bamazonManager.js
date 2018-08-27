@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  displayProducts();
+  viewProducts();
 });
 
 
@@ -24,22 +24,22 @@ function runApp(){
     message: "What would you like to do?",
     choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product","End Session"]
   }]).then(function(ans){
-  	if (ans.action == "View Products for Sale") {
-  		viewProducts();
-  	}else if (ans.action == "View Low Inventory") {
+  	if (ans.Action == "View Products for Sale") {	
+    viewProducts();
+  	} else if (ans.Action == "View Low Inventory") {
   		viewLowInventory();
-  	}else if (ans.action == "Add to Inventory") {
+  	}else if (ans.Action == "Add to Inventory") {
   		addToInventory();
-  	}else if (ans.action == "Add New Product") {
+  	}else if (ans.Action == "Add New Product") {
   		addNewProduct();
-  	}else (ans.action == "End Session") {
+  	}else if (ans.Action == "End Session") {
   		console.log('Bye!');
   	}
   });
 }
 
 
-function displayProducts() {
+function viewProducts() {
   connection.query("SELECT * FROM products", function(err, res) {
   	if(err) throw err;
   console.log('----------------------------------------------------------------------------------------------------')
@@ -53,7 +53,7 @@ runApp();
 
 //views inventory lower than 5
 function viewLowInventory(){
-  console.log('>>>>>>Viewing Low Inventory<<<<<<');
+  console.log('Viewing Low Inventory');
 
   connection.query('SELECT * FROM products', function(err, res){
   if(err) throw err;
@@ -89,9 +89,66 @@ function addToInventory(){
         var idOfProduct = answers.ID;
         restockDatabase(idOfProduct, quantityAdded);
     });
-}; //end restockRequest
+
+}; 
+
+function restockDatabase(id, quantityAdded) {
+    //update the database
+    connection.query('SELECT * FROM products WHERE item_id = ' + id, function(error, response) {
+        if (error) { console.log(error) };
+        connection.query('UPDATE products SET stock_quantity = stock_quantity + ' + quantityAdded + ' WHERE item_id = ' + id);
+        
+        runApp();
+    });
+}; 
+
+function addNewProduct() {
+    inquirer.prompt([
+
+        {
+            name: "Name",
+            type: "input",
+            message: "What is the name of the product you wish to stock?"
+        },
+        {
+            name: 'Department',
+            type: 'input',
+            message: "What department does this item belong in?"
+        },
+        {
+            name: 'Price',
+            type: 'input',
+            message: "How much would you like this to cost?"
+        },
+        {
+            name: 'Quantity',
+            type: 'input',
+            message: "How many would you like to add?"
+        }
+
+      ]).then(function (newProducts) {
+
+               connection.query("INSERT INTO products (product_name,department_name,price,stock_quantity) VALUES (?,?,?,?)",[newProducts.Name, newProducts.Department, newProducts.Price, newProducts.Quantity],
+               function(err, res) {
+                    if (err) throw err;
+                    // Runs the prompt again, so the user can keep shopping.
+                    console.log('Another item was added to the store.');
+                    runApp();
+             }); 
+
+           }); 
+         };  
 
 
 
 
-}
+
+
+
+
+
+
+
+
+
+

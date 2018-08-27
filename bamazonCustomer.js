@@ -26,14 +26,11 @@ function displayProducts() {
     } 
     inquireForPurchase();
 
-    // if (err) throw err;
-    // console.log(res);
-    // connection.end();
   });
 }
 
 function inquireForPurchase() {
-	//get item ID and desired quantity from user. Pass to purchase from Database
+	//get item ID and desired quantity from user
     inquirer.prompt([
 
         {
@@ -53,7 +50,7 @@ function inquireForPurchase() {
         purchaseFromDatabase(IDOdrered, quantityOrdered);
        // console.log("quantity ordered": + quantityOrdered + "id ordered": + IDOdrered);
     });
-}; //end inquireForPurchase
+};
 
 function purchaseFromDatabase(ID, quantityOrdered) {
     //check quantity of desired purchase. Minus quantity of the itemID from database if possible. Else inform user "Quantity desired not in stock" 
@@ -65,12 +62,12 @@ function purchaseFromDatabase(ID, quantityOrdered) {
             //calculate cost
             var totalCost = response[0].price * quantityOrdered;
             //inform user
-            console.log("We have what you need! I'll have your order right out!");
+            console.log("okay! I'll have your order right out!");
             console.log("Your total cost for " + quantityOrdered + " " + response[0].product_name + " is " + totalCost + ". Thank you for your Business!");
             //update database, minus purchased quantity
             connection.query('UPDATE products SET stock_quantity = stock_quantity - ' + quantityOrdered + ' WHERE item_id = ' + ID);
         } else {
-            console.log("Our apologies. We don't have enough " + response[0].product_name + " to fulfill your order.");
+            console.log("Our apologies! We don't have enough " + response[0].product_name + " to fulfill your order.");
         };
        connection.end();
     });
@@ -78,4 +75,3 @@ function purchaseFromDatabase(ID, quantityOrdered) {
 
 };
 
-//displayProducts();
