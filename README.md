@@ -37,7 +37,10 @@ This is an Amazon-like storefront using Node.js and MySQL. The app takes in orde
 
 
   DEMO LINKS 
+ 
   The vidos are available on the link.
-  BamazonCustomer:https://drive.google.com/open?id=1F920i_YPJm3HjIZ2-NVbvUyG2u2EEzyv
-  BamazonManager:https://drive.google.com/open?id=1HR6LPChSslSDurvIYJBbytESVGwQXCsT
+  <br>
+  BamazonCustomer: <a href= " https://drive.google.com/open?id=1F920i_YPJm3HjIZ2-NVbvUyG2u2EEzyv">BamazonCustomer.js Vidio </a>
+  <br>
+  BamazonManager: <a href= " https://drive.google.com/open?id=1HR6LPChSslSDurvIYJBbytESVGwQXCsT ">BamazonManager.js Vidio</a>
 
