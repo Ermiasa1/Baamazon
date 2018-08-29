@@ -38,10 +38,10 @@ This is an Amazon-like storefront using Node.js and MySQL. The app takes in orde
 
   DEMO LINKS 
  
-  The vidos are available on the link.
+  The vidos are available on the below links.
   <br>
   ![BamazonCustomer.js] ( https://drive.google.com/open?id=1F920i_YPJm3HjIZ2-NVbvUyG2u2EEzyv)
-  ![BamazonCustomer.js buying-product] ( https://images/bamazonCustomer/buying-product-2.png)
+  
   <br>
   ![BamazonManager.js] (https://drive.google.com/open?id=1HR6LPChSslSDurvIYJBbytESVGwQXCsT)
 
